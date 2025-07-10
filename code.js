@@ -159,3 +159,6 @@ const countryList = {
   ZMK: "ZM",
   ZWD: "ZW",
 };
+
+let national = "AD";
+console.log(countryList);
