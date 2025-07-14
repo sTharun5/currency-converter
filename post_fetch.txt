@@ -1,0 +1,9 @@
+const data = { name: "Tharun" };
+
+fetch("/api", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)  // ✅ sends as a JSON string
+});
+
+post method in fetch method 

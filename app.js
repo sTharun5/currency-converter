@@ -1,43 +1,72 @@
-const select_container = document.querySelectorAll(".select-container");
+const select_container = document.querySelectorAll('.select-container');
+const input = document.querySelector('#input');
+const getChange = document.querySelector('#getChange');
+let value = 1;
+let fromer = 'aed';
+let to = 'aed';
+let data;
+let ans = 1;
 
+input.addEventListener('change', () => {
+    value = input.value;
+});
 
-
-const convert = async()=>{
-    const currency_api = await fetch("https://2024-03-06.currency-api.pages.dev/v1/currencies/${currency}.json");
-    const data = currency_api.json();
+getChange.addEventListener('click', (e) => {
+    e.preventDefault();
     console.log(data);
-}
-convert();
+    let curr = data[fromer];
+    console.log(curr);
+
+    for (let find in curr) {
+        if(find == to){
+            console.log(curr[to]);
+            ans = curr[to];
+            const msg = document.querySelector(".msg");
+            ans = value * ans;
+             msg.innerHTML = value +" "+ fromer.toUpperCase() + " = " + Math.round(ans*100)/100  + " " + to.toUpperCase();
+
+        }
+    }
+});
 
 for (let selector of select_container) {
     const opt = selector.childNodes[3];
-
     for (let country in countryList) {
-        let option = document.createElement("option");
+        let option = document.createElement('option');
         option.innerHTML = country;
         opt.append(option);
     }
 }
-let str = (select_container[0].childNodes[3].value).substring(0,2);
-
-select_container[1].childNodes[1].src = "https://flagsapi.com/"+str+"/flat/64.png";
-select_container[0].childNodes[1].src = "https://flagsapi.com/"+str+"/flat/64.png";
-
-console.dir(select_container[0].childNodes[3]);
-
+let str = select_container[0].childNodes[3].value.substring(0, 2);
+select_container[1].childNodes[1].src =
+    'https://flagsapi.com/' + str + '/flat/64.png';
+select_container[0].childNodes[1].src =
+    'https://flagsapi.com/' + str + '/flat/64.png';
 
 
-select_container[0].childNodes[3].addEventListener("change",()=>{
- str = (select_container[0].childNodes[3].value).substring(0,2);
+select_container[0].childNodes[3].addEventListener('change', () => {
+    str = select_container[0].childNodes[3].value.substring(0, 2);
+    fromer = select_container[0].childNodes[3].value.toLowerCase();
+    select_container[0].childNodes[1].src =
+        'https://flagsapi.com/' + str + '/flat/64.png';
+        convert();
+});
 
-select_container[0].childNodes[1].src = "https://flagsapi.com/"+str+"/flat/64.png";
-})
+// to
+select_container[1].childNodes[3].addEventListener('change', () => {
+    str = select_container[1].childNodes[3].value.substring(0, 2);
+    to = select_container[1].childNodes[3].value.toLowerCase();
+    select_container[1].childNodes[1].src =
+        'https://flagsapi.com/' + str + '/flat/64.png';
+        convert();
+});
 
+// api fetching is done
+const convert = async () => {
+    const currency_api = await fetch(
+        'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/'+fromer+'.json'
+    );
+    data = await currency_api.json();
 
-
-
-select_container[1].childNodes[3].addEventListener("change",()=>{
- str = (select_container[1].childNodes[3].value).substring(0,2);
-
-select_container[1].childNodes[1].src = "https://flagsapi.com/"+str+"/flat/64.png";
-})
+};
+convert();

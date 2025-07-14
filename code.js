@@ -160,5 +160,5 @@ const countryList = {
   ZWD: "ZW",
 };
 
-let national = "AD";
-console.log(countryList);
+
+

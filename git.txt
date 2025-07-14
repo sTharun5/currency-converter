@@ -1,0 +1,13 @@
+git setup/configuration
+git config -- global user.name sTharun5
+git config -- global user.email tharun.ad22@bitsathy.ac.in
+
+git updation process...
+
+git status
+git add filename
+git add .
+git commit -m "updated"
+git push origin main
+
+
