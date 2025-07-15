@@ -31,7 +31,7 @@ getChange.addEventListener('click', (e) => {
     console.log(str);
 
     for (let letters of str) {
-        const numberStrings = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        const numberStrings = ['0','1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
         if (!numberStrings.includes(letters)) {
             alert('Enter a valid number');
